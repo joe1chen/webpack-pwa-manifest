@@ -202,3 +202,18 @@ When defining an icon object, you can also specify its output directory using a 
 
 If you specify a valid `crossorigin` property it will be added to the `<link rel="manifest">` in the HTML document. 
 This property determines if the request for the manifest includes CORS headers and is required if the manifest is located on a different domain or requires authentication.
+
+If you have non-square icons and want to preserve aspect ratio, then
+you can add `preserve_aspect_ratio` property to icon.
+
+```javascript
+  ...
+  icons: [
+    {
+      src: path.resolve('src/assets/icons/icon.png'),
+      size: '1024x768',
+      preserve_aspect_ratio: true
+    }
+  ]
+}
+```
