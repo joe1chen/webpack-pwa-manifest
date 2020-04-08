@@ -7,7 +7,8 @@ const tests = [
     'issue-87', 
     'rgb-background', 
     'rgba-background',
-    'preserve-aspect-ratio'
+    'preserve-aspect-ratio',
+    'preserve-filename'
 ]
 
 console.log('Running tests...')

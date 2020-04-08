@@ -1,6 +1,7 @@
 import fs from 'fs'
 import jimp from 'jimp'
 import mime from 'mime'
+import path from 'path'
 import { joinURI } from '../helpers/uri'
 import generateFingerprint from '../helpers/fingerprint'
 import IconError from '../errors/IconError'
@@ -53,6 +54,7 @@ function sanitizeIcon (iconSnippet) {
     ios: iconSnippet.ios || false,
     color: iconSnippet.color,
     purpose: iconSnippet.purpose,
+    preserve_filename: iconSnippet.preserve_filename,
     preserve_aspect_ratio: iconSnippet.preserve_aspect_ratio
   };
   return icon;
@@ -60,7 +62,16 @@ function sanitizeIcon (iconSnippet) {
 
 function processIcon (currentSize, icon, buffer, mimeType, publicPath, shouldFingerprint) {
   const dimensions = `${currentSize.width}x${currentSize.height}`
-  const fileName = shouldFingerprint ? `icon_${dimensions}.${generateFingerprint(buffer)}.${mime.getExtension(mimeType)}` : `icon_${dimensions}.${mime.getExtension(mimeType)}`
+  let fileNamePrefix;
+  if (icon.preserve_filename) {
+    const fileNameParsed = path.parse(icon.src);
+    fileNamePrefix = fileNameParsed.name;
+  }
+  else {
+    fileNamePrefix = `icon_${dimensions}`;
+  }
+  
+  const fileName = shouldFingerprint ? `${fileNamePrefix}.${generateFingerprint(buffer)}.${mime.getExtension(mimeType)}` : `${fileNamePrefix}.${mime.getExtension(mimeType)}`
   const iconOutputDir = icon.destination ? joinURI(icon.destination, fileName) : fileName
   const iconPublicUrl = joinURI(publicPath, iconOutputDir)
   return {

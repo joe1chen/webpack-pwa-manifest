@@ -1,0 +1,26 @@
+{
+  "icons": [
+    {
+      "src": "/icons/apple_icon_1024x768.13cc50880ee6edb35bc6c0d2a02ad3b8.png",
+      "sizes": "1024x768",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/apple_icon_630x1024.786b48e194c7113092fe958d4fc2fffc.svg",
+      "sizes": "630x1024",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icons/apple_icon_512x384.597d2627589c817fe3d15204b6e28939.png",
+      "sizes": "512x384",
+      "type": "image/png"
+    }
+  ],
+  "name": "My Progressive Web App",
+  "short_name": "MyPWA",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "My awesome Progressive Web App!",
+  "background_color": "#ffffff"
+}

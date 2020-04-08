@@ -217,3 +217,19 @@ you can add `preserve_aspect_ratio` property to icon.
   ]
 }
 ```
+
+If you want to preserve the original filename of the icons, then you can add `preserve_filename` property to icon.
+
+```javascript
+  ...
+  icons: [
+    {
+      src: path.resolve('src/assets/icons/my-icon-blah.png'),
+      size: '152x152',
+      preserve_filename: true
+    }
+  ]
+}
+```
+
+With `preserve_filename`, the image filename will be named `my-icon-blah-152x152.png` instead of `icon-152x152.png`

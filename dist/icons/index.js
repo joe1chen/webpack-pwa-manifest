@@ -12,6 +12,8 @@ var _jimp = _interopRequireDefault(require("jimp"));
 
 var _mime = _interopRequireDefault(require("mime"));
 
+var _path = _interopRequireDefault(require("path"));
+
 var _uri = require("../helpers/uri");
 
 var _fingerprint = _interopRequireDefault(require("../helpers/fingerprint"));
@@ -90,6 +92,7 @@ function sanitizeIcon(iconSnippet) {
     ios: iconSnippet.ios || false,
     color: iconSnippet.color,
     purpose: iconSnippet.purpose,
+    preserve_filename: iconSnippet.preserve_filename,
     preserve_aspect_ratio: iconSnippet.preserve_aspect_ratio
   };
   return icon;
@@ -97,7 +100,19 @@ function sanitizeIcon(iconSnippet) {
 
 function processIcon(currentSize, icon, buffer, mimeType, publicPath, shouldFingerprint) {
   var dimensions = "".concat(currentSize.width, "x").concat(currentSize.height);
-  var fileName = shouldFingerprint ? "icon_".concat(dimensions, ".").concat((0, _fingerprint["default"])(buffer), ".").concat(_mime["default"].getExtension(mimeType)) : "icon_".concat(dimensions, ".").concat(_mime["default"].getExtension(mimeType));
+  var fileNamePrefix;
+  console.log("Icon: ".concat(JSON.stringify(icon)));
+
+  if (icon.preserve_filename) {
+    var fileNameParsed = _path["default"].parse(icon.src);
+
+    console.log("Parsed: ".concat(JSON.stringify(fileNameParsed)));
+    fileNamePrefix = fileNameParsed.name;
+  } else {
+    fileNamePrefix = "icon_".concat(dimensions);
+  }
+
+  var fileName = shouldFingerprint ? "".concat(fileNamePrefix, ".").concat((0, _fingerprint["default"])(buffer), ".").concat(_mime["default"].getExtension(mimeType)) : "".concat(fileNamePrefix, ".").concat(_mime["default"].getExtension(mimeType));
   var iconOutputDir = icon.destination ? (0, _uri.joinURI)(icon.destination, fileName) : fileName;
   var iconPublicUrl = (0, _uri.joinURI)(publicPath, iconOutputDir);
   return {
