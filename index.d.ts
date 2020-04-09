@@ -60,5 +60,7 @@ declare namespace WebpackPwaManifest {
         sizes?: number[];
         destination?: string;
         ios?: boolean | 'default' | 'startup';
+        preserve_filename?: boolean;
+        preserve_aspect_ratio?: boolean;
     }
 }
