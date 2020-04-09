@@ -101,18 +101,16 @@ function sanitizeIcon(iconSnippet) {
 function processIcon(currentSize, icon, buffer, mimeType, publicPath, shouldFingerprint) {
   var dimensions = "".concat(currentSize.width, "x").concat(currentSize.height);
   var fileNamePrefix;
-  console.log("Icon: ".concat(JSON.stringify(icon)));
 
   if (icon.preserve_filename) {
     var fileNameParsed = _path["default"].parse(icon.src);
 
-    console.log("Parsed: ".concat(JSON.stringify(fileNameParsed)));
     fileNamePrefix = fileNameParsed.name;
   } else {
     fileNamePrefix = "icon_".concat(dimensions);
   }
 
-  var fileName = shouldFingerprint ? "".concat(fileNamePrefix, ".").concat((0, _fingerprint["default"])(buffer), ".").concat(_mime["default"].getExtension(mimeType)) : "".concat(fileNamePrefix, ".").concat(_mime["default"].getExtension(mimeType));
+  var fileName = shouldFingerprint === true || shouldFingerprint === 'icons' ? "".concat(fileNamePrefix, ".").concat((0, _fingerprint["default"])(buffer), ".").concat(_mime["default"].getExtension(mimeType)) : "".concat(fileNamePrefix, ".").concat(_mime["default"].getExtension(mimeType));
   var iconOutputDir = icon.destination ? (0, _uri.joinURI)(icon.destination, fileName) : fileName;
   var iconPublicUrl = (0, _uri.joinURI)(publicPath, iconOutputDir);
   return {

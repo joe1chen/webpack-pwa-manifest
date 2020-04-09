@@ -48,7 +48,7 @@ function createFilename(filenameTemplate, json, shouldFingerprint) {
     pattern: /\[hash(:([1-9]|[1-2][0-9]|3[0-2]))?\]/gi,
     value: function value(match) {
       var limit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ':32';
-      if (!shouldFingerprint) return '';
+      if (!shouldFingerprint && shouldFingerprint !== 'manifest') return '';
       var hash = (0, _fingerprint["default"])(json);
       return hash.substr(0, parseInt(limit.substr(1), 10));
     }

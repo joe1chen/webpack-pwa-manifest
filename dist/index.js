@@ -36,7 +36,7 @@ function () {
     }
 
     this.options = Object.assign({
-      filename: options.fingerprints ? '[name].[hash].[ext]' : '[name].[ext]',
+      filename: options.fingerprints === true || options.fingerprints === 'manifest' ? '[name].[hash].[ext]' : '[name].[ext]',
       name: 'App',
       short_name: shortName,
       orientation: 'portrait',

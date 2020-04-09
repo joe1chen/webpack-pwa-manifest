@@ -3,6 +3,8 @@ const tests = [
     'basic', 
     'complex', 
     'fingerprints-false',
+    'fingerprints-manifest',
+    'fingerprints-icons',
     'issue-84',
     'issue-87', 
     'rgb-background', 

@@ -71,7 +71,7 @@ function processIcon (currentSize, icon, buffer, mimeType, publicPath, shouldFin
     fileNamePrefix = `icon_${dimensions}`;
   }
   
-  const fileName = shouldFingerprint ? `${fileNamePrefix}.${generateFingerprint(buffer)}.${mime.getExtension(mimeType)}` : `${fileNamePrefix}.${mime.getExtension(mimeType)}`
+  const fileName = (shouldFingerprint === true || shouldFingerprint === 'icons') ? `${fileNamePrefix}.${generateFingerprint(buffer)}.${mime.getExtension(mimeType)}` : `${fileNamePrefix}.${mime.getExtension(mimeType)}`
   const iconOutputDir = icon.destination ? joinURI(icon.destination, fileName) : fileName
   const iconPublicUrl = joinURI(publicPath, iconOutputDir)
   return {
